@@ -1,62 +1,17 @@
 #include <iostream>
-#include <stack> // Include stack library for directory history
 
 using namespace std;
 #include "../entities/FileSystem.h"
 #include "../utils/addFileToDirectory.cpp"
 #include "../utils/addSubdirectory.cpp"
 #include "../utils/calculateWastedDiskSpace.cpp"
-#include "../utils/defragmentDisk.cpp"
+#include "../utils/calculateDiskFragmentation.cpp"
 #include "../utils/displayDirectory.cpp"
 #include "../utils/findFreeBlocks.cpp"
 #include "../utils/renameDirectory.cpp"
 #include "../utils/renameFile.cpp"
-
-// Define a stack to keep track of directory history
-std::stack<Directory> directoryHistory;
-void deleteFile(Directory &directory, const std::string &fileName, Filesystem &fs)
-{
-    for (size_t i = 0; i < directory.files.size(); ++i)
-    {
-        if (directory.files[i].name == fileName)
-        {
-            // Clear the blocks used by the file
-            for (int j = directory.files[i].start_block; j < directory.files[i].start_block + directory.files[i].size; ++j)
-            {
-                fs.blocks[j].used = 0;
-                fs.blocks[j].file_index = -1;
-            }
-
-            // Remove the file from the directory
-            directory.files.erase(directory.files.begin() + i);
-            std::cout << "File '" << fileName << "' deleted successfully." << std::endl;
-            return;
-        }
-    }
-    std::cout << "File not found: " << fileName << std::endl;
-}
-
-void deleteDirectory(Directory &parent, const std::string &dirName)
-{
-    for (size_t i = 0; i < parent.subdirectories.size(); ++i)
-    {
-        if (parent.subdirectories[i].name == dirName)
-        {
-            // Check if the directory is empty before deleting it
-            if (!parent.subdirectories[i].files.empty() || !parent.subdirectories[i].subdirectories.empty())
-            {
-                std::cout << "Directory is not empty. Cannot delete." << std::endl;
-                return;
-            }
-
-            // Remove the directory
-            parent.subdirectories.erase(parent.subdirectories.begin() + i);
-            std::cout << "Directory '" << dirName << "' deleted successfully." << std::endl;
-            return;
-        }
-    }
-    std::cout << "Directory not found: " << dirName << std::endl;
-}
+#include "../utils/deleteDirectory.cpp"
+#include "../utils/deleteFile.cpp"
 
 int main()
 {
@@ -88,7 +43,7 @@ int main()
         std::cout << "1. Store a file" << std::endl;
         std::cout << "2. List contents of the current directory" << std::endl;
         std::cout << "3. Create a subdirectory" << std::endl;
-        std::cout << "4. Change current directory" << std::endl;
+        std::cout << "4. Navigate to different directory" << std::endl;
         std::cout << "5. Rename a file" << std::endl;
         std::cout << "6. Rename a directory" << std::endl;
         std::cout << "7. Defragment the disk" << std::endl;
@@ -101,6 +56,8 @@ int main()
         std::cout << "Enter your choice: ";
         std::cin >> choice;
         // std::cout << "------------------------------------------------------";
+        int fragmentedBlocks = 0;
+        int totalBlocks = 0;
 
         switch (choice)
         {
@@ -178,7 +135,7 @@ int main()
             std::cin >> oldName;
             std::cout << "Enter the new name for the file: ";
             std::cin >> newName;
-            renameFile(fs, oldName, newName);
+            renameFile(currentDirectory, oldName, newName);
             break;
 
         case 6:
@@ -190,11 +147,19 @@ int main()
             break;
 
         case 7:
-            defragmentDisk(fs);
+            fragmentedBlocks = calculateDiskFragmentation(fs);
+            for (int i = 0; i < MAX_BLOCKS; i++)
+            {
+                if (fs.blocks[i].used == 1)
+                {
+                    totalBlocks++;
+                }
+            }
+            std::cout << "Disk Fragmentation: " << fragmentedBlocks << " out of " << totalBlocks << " blocks." << std::endl;
             break;
 
         case 8:
-            std::cout << "Wasted Disk Space: " << calculateWastedDiskSpace(fs) << " blocks" << std::endl;
+            std::cout << "Wasted Disk Space: " << calculateWastedDiskSpace(fs) << "KB" << std::endl;
             break;
 
         case 9:

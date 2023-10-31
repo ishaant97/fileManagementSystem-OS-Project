@@ -6,8 +6,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stack> // Include stack library for directory history
 
-const int MAX_BLOCKS = 100;
+const int MAX_BLOCKS = 1000;
 const int MAX_FILES = 100;
 
 struct File
@@ -36,5 +37,8 @@ struct Filesystem
     Directory root;
     DiskBlock blocks[MAX_BLOCKS];
 };
+
+// Define a stack to keep track of directory history
+std::stack<Directory> directoryHistory;
 
 #endif // FILESYSTEM_H
