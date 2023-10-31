@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stack> // Include stack library for directory history
+
 using namespace std;
 #include "../entities/FileSystem.h"
 #include "../utils/addFileToDirectory.cpp"
@@ -9,6 +11,52 @@ using namespace std;
 #include "../utils/findFreeBlocks.cpp"
 #include "../utils/renameDirectory.cpp"
 #include "../utils/renameFile.cpp"
+
+// Define a stack to keep track of directory history
+std::stack<Directory> directoryHistory;
+void deleteFile(Directory &directory, const std::string &fileName, Filesystem &fs)
+{
+    for (size_t i = 0; i < directory.files.size(); ++i)
+    {
+        if (directory.files[i].name == fileName)
+        {
+            // Clear the blocks used by the file
+            for (int j = directory.files[i].start_block; j < directory.files[i].start_block + directory.files[i].size; ++j)
+            {
+                fs.blocks[j].used = 0;
+                fs.blocks[j].file_index = -1;
+            }
+
+            // Remove the file from the directory
+            directory.files.erase(directory.files.begin() + i);
+            std::cout << "File '" << fileName << "' deleted successfully." << std::endl;
+            return;
+        }
+    }
+    std::cout << "File not found: " << fileName << std::endl;
+}
+
+void deleteDirectory(Directory &parent, const std::string &dirName)
+{
+    for (size_t i = 0; i < parent.subdirectories.size(); ++i)
+    {
+        if (parent.subdirectories[i].name == dirName)
+        {
+            // Check if the directory is empty before deleting it
+            if (!parent.subdirectories[i].files.empty() || !parent.subdirectories[i].subdirectories.empty())
+            {
+                std::cout << "Directory is not empty. Cannot delete." << std::endl;
+                return;
+            }
+
+            // Remove the directory
+            parent.subdirectories.erase(parent.subdirectories.begin() + i);
+            std::cout << "Directory '" << dirName << "' deleted successfully." << std::endl;
+            return;
+        }
+    }
+    std::cout << "Directory not found: " << dirName << std::endl;
+}
 
 int main()
 {
@@ -45,11 +93,14 @@ int main()
         std::cout << "6. Rename a directory" << std::endl;
         std::cout << "7. Defragment the disk" << std::endl;
         std::cout << "8. Calculate Wasted Disk Space" << std::endl;
-        std::cout << "9. Exit" << std::endl;
+        std::cout << "9. Delete a file" << std::endl;       // Add case 10
+        std::cout << "10. Delete a directory" << std::endl; // Add case 11
+        std::cout << "11. Exit" << std::endl;
 
         int choice;
         std::cout << "Enter your choice: ";
         std::cin >> choice;
+        // std::cout << "------------------------------------------------------";
 
         switch (choice)
         {
@@ -64,6 +115,7 @@ int main()
             if (start_block == -1)
             {
                 std::cout << "Disk is full. Cannot store the file: " << name << std::endl;
+                std::cout << "------------------------------------------------------";
                 break;
             }
 
@@ -76,6 +128,7 @@ int main()
             }
 
             std::cout << "File stored successfully: " << name << std::endl;
+            std::cout << "------------------------------------------------------";
             break;
 
         case 2:
@@ -89,15 +142,33 @@ int main()
             break;
 
         case 4:
-            std::cout << "Enter directory name to navigate to: ";
+            std::cout << "Enter directory name to navigate to (or use '..' to go up): ";
             std::cin >> targetDir;
 
-            for (auto &subdirectory : currentDirectory.subdirectories)
+            if (targetDir == "..")
             {
-                if (subdirectory.name == targetDir)
+                if (!directoryHistory.empty())
                 {
-                    currentDirectory = subdirectory;
-                    break;
+                    currentDirectory = directoryHistory.top(); // Go up one level
+                    directoryHistory.pop();
+                }
+                else
+                {
+                    std::cout << "You are already at the root directory." << std::endl;
+                }
+            }
+            else
+            {
+                // Search for the desired subdirectory
+                for (auto &subdirectory : currentDirectory.subdirectories)
+                {
+                    if (subdirectory.name == targetDir)
+                    {
+                        // Push the current directory to the history
+                        directoryHistory.push(currentDirectory);
+                        currentDirectory = subdirectory;
+                        break;
+                    }
                 }
             }
             break;
@@ -127,6 +198,18 @@ int main()
             break;
 
         case 9:
+            std::cout << "Enter the name of the file to delete: ";
+            std::cin >> name;
+            deleteFile(currentDirectory, name, fs);
+            break;
+
+        case 10:
+            std::cout << "Enter the name of the directory to delete: ";
+            std::cin >> subDirName;
+            deleteDirectory(currentDirectory, subDirName);
+            break;
+
+        case 11:
             std::cout << "Exiting the program." << std::endl;
             return 0;
 
