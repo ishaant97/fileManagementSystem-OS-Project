@@ -10,7 +10,6 @@ A simple yet robust file system simulation in C++ for educational purposes, desi
 - [How to Use](#how-to-use)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -43,9 +42,27 @@ To run this project, you'll need the following:
 2. Compile the source code:
 
     ```shell
-    g++ -o filesystem filesystem.cpp
+    g++ main.cpp -o main.exe
 
 3. Run the program:
 
     ```shell
-    ./filesystem
+    ./main.exe
+
+
+## Screenshot
+![Alt text](image.png)
+
+
+## Contributing
+
+Contributions to this project are welcome. You can contribute by:
+
+
+- Forking the repository:
+
+- Creating a new branch for your feature or bug fix
+- Making your changes
+- Submitting a pull request
+
+Please ensure that your code follows the project's coding standards and is well-documented.
