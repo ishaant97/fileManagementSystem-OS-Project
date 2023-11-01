@@ -1,6 +1,6 @@
 # File System Simulation
 
-A simple yet robust file system simulation in C++ for educational purposes, designed to emulate essential file management operations and provide insights into disk utilization.
+A simple yet robust file system simulation in C++ for educational purposes, designed to simulate essential file management operations and provide insights into disk utilization.
 
 ## Table of Contents
 
@@ -42,8 +42,10 @@ To run this project, you'll need the following:
 
 2. Compile the source code:
 
+    ```shell
     g++ -o filesystem filesystem.cpp
 
 3. Run the program:
 
+    ```shell
     ./filesystem
