@@ -37,12 +37,12 @@ To run this project, you'll need the following:
 1. Clone this repository to your local machine:
 
    ```shell
-   git clone https://github.com/your-username/file-system-simulation.git
+   git clone https://github.com/ishaant-97/fileManagementSystem-OS-Project
 
 2. Compile the source code:
 
     ```shell
-    g++ main.cpp -o main.exe
+    g++ main.cpp -o main
 
 3. Run the program:
 
