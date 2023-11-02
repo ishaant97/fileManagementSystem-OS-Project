@@ -2,7 +2,7 @@
 using namespace std;
 #include "../entities/FileSystem.h"
 
-void addFileToDirectory(Directory &directory, const std::string &name, int size, int start_block)
+void addFileToDirectory(Directory &directory, const string &name, int size, int start_block)
 {
     File newFile;
     newFile.name = name;

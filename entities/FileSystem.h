@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <stack> // Include stack library for directory history
+#include <stack>
 
 const int MAX_BLOCKS = 1000;
 const int MAX_FILES = 100;

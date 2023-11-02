@@ -16,14 +16,14 @@ using namespace std;
 int main()
 {
     Filesystem fs;
-    std::string name;
-    std::string subDirName;
-    std::string targetDir;
+    string name;
+    string subDirName;
+    string targetDir;
     Directory newDirectory;
-    std::string oldName;
-    std::string newName;
-    std::string oldDirName;
-    std::string newDirName;
+    string oldName;
+    string newName;
+    string oldDirName;
+    string newDirName;
     int start_block; // Declare start_block here
     int size;        // Declare size here
 
@@ -39,22 +39,22 @@ int main()
 
     while (true)
     {
-        std::cout << "\nFile System Simulation Menu:" << std::endl;
-        std::cout << "1. Store a file" << std::endl;
-        std::cout << "2. List contents of the current directory" << std::endl;
-        std::cout << "3. Create a subdirectory" << std::endl;
-        std::cout << "4. Navigate to different directory" << std::endl;
-        std::cout << "5. Rename a file" << std::endl;
-        std::cout << "6. Rename a directory" << std::endl;
-        std::cout << "7. Defragment the disk" << std::endl;
-        std::cout << "8. Calculate Wasted Disk Space" << std::endl;
-        std::cout << "9. Delete a file" << std::endl;       // Add case 10
-        std::cout << "10. Delete a directory" << std::endl; // Add case 11
-        std::cout << "11. Exit" << std::endl;
+        cout << "\nFile System Simulation Menu:" << endl;
+        cout << "1. Store a file" << endl;
+        cout << "2. List contents of the current directory" << endl;
+        cout << "3. Create a subdirectory" << endl;
+        cout << "4. Navigate to different directory" << endl;
+        cout << "5. Rename a file" << endl;
+        cout << "6. Rename a directory" << endl;
+        cout << "7. Defragment the disk" << endl;
+        cout << "8. Calculate Wasted Disk Space" << endl;
+        cout << "9. Delete a file" << endl;
+        cout << "10. Delete a directory" << endl;
+        cout << "11. Exit" << endl;
 
         int choice;
-        std::cout << "Enter your choice: ";
-        std::cin >> choice;
+        cout << "Enter your choice: ";
+        cin >> choice;
         // std::cout << "------------------------------------------------------";
         int fragmentedBlocks = 0;
         int totalBlocks = 0;
@@ -62,17 +62,17 @@ int main()
         switch (choice)
         {
         case 1:
-            std::cout << "Enter file name: ";
-            std::cin >> name;
-            std::cout << "Enter file size (in KB): ";
-            std::cin >> size;
+            cout << "Enter file name: ";
+            cin >> name;
+            cout << "Enter file size (in KB): ";
+            cin >> size;
 
             start_block = findFreeBlocks(fs, size); // Initialize start_block here
 
             if (start_block == -1)
             {
-                std::cout << "Disk is full. Cannot store the file: " << name << std::endl;
-                std::cout << "------------------------------------------------------";
+                cout << "Disk is full. Cannot store the file: " << name << endl;
+                cout << "------------------------------------------------------" << endl;
                 break;
             }
 
@@ -84,13 +84,13 @@ int main()
                 fs.blocks[i].file_index = currentDirectory.files.size() - 1;
             }
 
-            std::cout << "File stored successfully: " << name << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << "File stored successfully: " << name << endl;
+            cout << "------------------------------------------------------" << endl;
             break;
 
         case 2:
             displayDirectory(currentDirectory, fs);
-            std::cout << "------------------------------------------------------";
+            std::cout << "------------------------------------------------------" << endl;
             break;
 
         case 3:

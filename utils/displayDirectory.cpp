@@ -4,7 +4,7 @@ using namespace std;
 
 void displayDirectory(Directory &directory, Filesystem &fs)
 {
-    std::cout << "Contents of Directory: " << directory.name << std::endl;
+    std::cout << "Contents of " << directory.name << " directory: " << std::endl;
 
     for (const File &file : directory.files)
     {

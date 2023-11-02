@@ -23,11 +23,11 @@ int findFreeBlocks(Filesystem &fs, int size)
                 return start_block;
             }
         }
-        else
-        {
-            start_block = -1;
-            consecutive_free_blocks = 0;
-        }
+        // else
+        // {
+        //     start_block = -1;
+        //     consecutive_free_blocks = 0;
+        // }
     }
     return -1; // No contiguous free blocks found
 }
