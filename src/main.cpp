@@ -90,27 +90,27 @@ int main()
 
         case 2:
             displayDirectory(currentDirectory, fs);
-            std::cout << "------------------------------------------------------" << endl;
+            cout << "------------------------------------------------------" << endl;
             break;
 
         case 3:
-            std::cout << "Enter subdirectory name: ";
-            std::cin >> subDirName;
+            cout << "Enter subdirectory name: ";
+            cin >> subDirName;
             if (addSubdirectory(currentDirectory, subDirName, newDirectory))
             {
-                std::cout << "Subdirectory Created successfully: " << subDirName << std::endl;
-                std::cout << "------------------------------------------------------";
+                cout << "Subdirectory Created successfully: " << subDirName << endl;
+                cout << "------------------------------------------------------";
                 break;
             }
             else
             {
-                std::cout << "Error Creating Subdirectory" << std::endl;
-                std::cout << "------------------------------------------------------";
+                cout << "Error Creating Subdirectory" << std::endl;
+                cout << "------------------------------------------------------";
                 break;
             }
         case 4:
-            std::cout << "Enter directory name to navigate to (or use '..' to go up): ";
-            std::cin >> targetDir;
+            cout << "Enter directory name to navigate to (or use '..' to go up): ";
+            cin >> targetDir;
 
             if (targetDir == "..")
             {
@@ -118,13 +118,13 @@ int main()
                 {
                     currentDirectory = directoryHistory.top(); // Go up one level
                     directoryHistory.pop();
-                    std::cout << "You are successfully navigated to on level up" << std::endl;
-                    std::cout << "------------------------------------------------------";
+                    cout << "You are successfully navigated to on level up" << endl;
+                    cout << "------------------------------------------------------";
                 }
                 else
                 {
-                    std::cout << "You are already at the root directory." << std::endl;
-                    std::cout << "------------------------------------------------------";
+                    cout << "You are already at the root directory." << endl;
+                    cout << "------------------------------------------------------";
                 }
             }
             else
@@ -147,23 +147,23 @@ int main()
             break;
 
         case 5:
-            std::cout << "Enter the name of the file to rename: ";
-            std::cin >> oldName;
-            std::cout << "Enter the new name for the file: ";
-            std::cin >> newName;
+            cout << "Enter the name of the file to rename: ";
+            cin >> oldName;
+            cout << "Enter the new name for the file: ";
+            cin >> newName;
             renameFile(currentDirectory, oldName, newName);
-            std::cout << oldName << "was successfully renamed to " << newName << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << oldName << "was successfully renamed to " << newName << endl;
+            cout << "------------------------------------------------------";
             break;
 
         case 6:
-            std::cout << "Enter the name of the directory to rename: ";
-            std::cin >> oldDirName;
-            std::cout << "Enter the new name for the directory: ";
-            std::cin >> newDirName;
+            cout << "Enter the name of the directory to rename: ";
+            cin >> oldDirName;
+            cout << "Enter the new name for the directory: ";
+            cin >> newDirName;
             renameDirectory(currentDirectory, oldDirName, newDirName);
-            std::cout << oldDirName << "was successfully renamed to " << newDirName << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << oldDirName << "was successfully renamed to " << newDirName << endl;
+            cout << "------------------------------------------------------";
             break;
 
         case 7:
@@ -175,38 +175,38 @@ int main()
                     totalBlocks++;
                 }
             }
-            std::cout << "Disk Fragmentation: " << fragmentedBlocks << " out of " << totalBlocks << " blocks." << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << "Disk Fragmentation: " << fragmentedBlocks << " out of " << totalBlocks << " blocks." << endl;
+            cout << "------------------------------------------------------";
             break;
 
         case 8:
-            std::cout << "Wasted Disk Space: " << calculateWastedDiskSpace(fs) << "KB" << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << "Wasted Disk Space: " << calculateWastedDiskSpace(fs) << "KB" << endl;
+            cout << "------------------------------------------------------";
             break;
 
         case 9:
-            std::cout << "Enter the name of the file to delete: ";
-            std::cin >> name;
+            cout << "Enter the name of the file to delete: ";
+            cin >> name;
             deleteFile(currentDirectory, name, fs);
-            std::cout << name << "was successfully deleted" << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << name << "was successfully deleted" << endl;
+            cout << "------------------------------------------------------";
             break;
 
         case 10:
-            std::cout << "Enter the name of the directory to delete: ";
-            std::cin >> subDirName;
+            cout << "Enter the name of the directory to delete: ";
+            cin >> subDirName;
             deleteDirectory(currentDirectory, subDirName);
-            std::cout << subDirName << "was successfully deleted" << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << subDirName << "was successfully deleted" << endl;
+            cout << "------------------------------------------------------";
             break;
 
         case 11:
-            std::cout << "Exiting the program." << std::endl;
+            cout << "Exiting the program." << endl;
             return 0;
 
         default:
-            std::cout << "Invalid choice. Please try again." << std::endl;
-            std::cout << "------------------------------------------------------";
+            cout << "Invalid choice. Please try again." << endl;
+            cout << "------------------------------------------------------";
         }
     }
 
