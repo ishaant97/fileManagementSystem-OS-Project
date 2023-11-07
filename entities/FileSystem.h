@@ -1,8 +1,6 @@
-// Filesystem.h
-
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
-
+using namespace std;
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,9 +18,9 @@ struct File
 
 struct Directory
 {
-    std::string name;
-    std::vector<File> files;
-    std::vector<Directory> subdirectories;
+    string name;
+    vector<File> files;
+    vector<Directory> subdirectories;
 };
 
 struct DiskBlock
@@ -38,7 +36,6 @@ struct Filesystem
     DiskBlock blocks[MAX_BLOCKS];
 };
 
-// Define a stack to keep track of directory history
-std::stack<Directory> directoryHistory;
+stack<Directory> directoryHistory;
 
-#endif // FILESYSTEM_H
+#endif

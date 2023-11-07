@@ -24,8 +24,8 @@ int main()
     string newName;
     string oldDirName;
     string newDirName;
-    int start_block; // Declare start_block here
-    int size;        // Declare size here
+    int start_block;
+    int size;
 
     for (int i = 0; i < MAX_BLOCKS; i++)
     {
@@ -55,7 +55,7 @@ int main()
         int choice;
         cout << "Enter your choice: ";
         cin >> choice;
-        // std::cout << "------------------------------------------------------";
+        // cout << "------------------------------------------------------";
         int fragmentedBlocks = 0;
         int totalBlocks = 0;
 
@@ -67,7 +67,7 @@ int main()
             cout << "Enter file size (in KB): ";
             cin >> size;
 
-            start_block = findFreeBlocks(fs, size); // Initialize start_block here
+            start_block = findFreeBlocks(fs, size);
 
             if (start_block == -1)
             {
@@ -104,7 +104,7 @@ int main()
             }
             else
             {
-                cout << "Error Creating Subdirectory" << std::endl;
+                cout << "Error Creating Subdirectory" << endl;
                 cout << "------------------------------------------------------";
                 break;
             }
@@ -147,22 +147,22 @@ int main()
             break;
 
         case 5:
-            cout << "Enter the name of the file to rename: ";
+            cout << "Enter the name of the file to be renamed: ";
             cin >> oldName;
             cout << "Enter the new name for the file: ";
             cin >> newName;
             renameFile(currentDirectory, oldName, newName);
-            cout << oldName << "was successfully renamed to " << newName << endl;
+            cout << oldName << " was successfully renamed to " << newName << endl;
             cout << "------------------------------------------------------";
             break;
 
         case 6:
-            cout << "Enter the name of the directory to rename: ";
+            cout << "Enter the name of the directory to be renamed: ";
             cin >> oldDirName;
             cout << "Enter the new name for the directory: ";
             cin >> newDirName;
             renameDirectory(currentDirectory, oldDirName, newDirName);
-            cout << oldDirName << "was successfully renamed to " << newDirName << endl;
+            cout << oldDirName << " was successfully renamed to " << newDirName << endl;
             cout << "------------------------------------------------------";
             break;
 
@@ -188,7 +188,7 @@ int main()
             cout << "Enter the name of the file to delete: ";
             cin >> name;
             deleteFile(currentDirectory, name, fs);
-            cout << name << "was successfully deleted" << endl;
+            cout << name << " was successfully deleted" << endl;
             cout << "------------------------------------------------------";
             break;
 
@@ -196,7 +196,7 @@ int main()
             cout << "Enter the name of the directory to delete: ";
             cin >> subDirName;
             deleteDirectory(currentDirectory, subDirName);
-            cout << subDirName << "was successfully deleted" << endl;
+            cout << subDirName << " was successfully deleted" << endl;
             cout << "------------------------------------------------------";
             break;
 
@@ -209,6 +209,5 @@ int main()
             cout << "------------------------------------------------------";
         }
     }
-
     return 0;
 }

@@ -2,8 +2,8 @@
 using namespace std;
 #include "../entities/FileSystem.h"
 
-bool addSubdirectory(Directory &parent, const std::string &name, Directory &subdirectory)
+bool addSubdirectory(Directory &currentDirectory, string &subDirName, Directory &newdirectory)
 {
-    subdirectory.name = name;
-    parent.subdirectories.push_back(subdirectory);
+    newdirectory.name = subDirName;
+    currentDirectory.subdirectories.push_back(newdirectory);
 }

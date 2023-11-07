@@ -2,17 +2,17 @@
 using namespace std;
 #include "../entities/FileSystem.h"
 
-void displayDirectory(Directory &directory, Filesystem &fs)
+void displayDirectory(Directory directory, Filesystem fs)
 {
-    std::cout << "Contents of " << directory.name << " directory: " << std::endl;
+    cout << "Contents of " << directory.name << " directory: " << endl;
 
-    for (const File &file : directory.files)
+    for (const File file : directory.files)
     {
-        std::cout << "\t File: " << file.name << " (Size: " << file.size << " KB)" << std::endl;
+        cout << "\t File: " << file.name << " (Size: " << file.size << " KB)" << endl;
     }
 
-    for (const Directory &subdirectory : directory.subdirectories)
+    for (const Directory subdirectory : directory.subdirectories)
     {
-        std::cout << "\t Subdirectory: " << subdirectory.name << std::endl;
+        cout << "\t Subdirectory: " << subdirectory.name << endl;
     }
 }

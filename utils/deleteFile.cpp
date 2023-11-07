@@ -2,7 +2,7 @@
 using namespace std;
 #include "../entities/FileSystem.h"
 
-void deleteFile(Directory &directory, const std::string &fileName, Filesystem &fs)
+void deleteFile(Directory &directory, string &fileName, Filesystem &fs)
 {
     for (size_t i = 0; i < directory.files.size(); ++i)
     {
@@ -17,9 +17,9 @@ void deleteFile(Directory &directory, const std::string &fileName, Filesystem &f
 
             // Remove the file from the directory
             directory.files.erase(directory.files.begin() + i);
-            std::cout << "File '" << fileName << "' deleted successfully." << std::endl;
+            // std::cout << "File '" << fileName << "' deleted successfully." << std::endl;
             return;
         }
     }
-    std::cout << "File not found: " << fileName << std::endl;
+    cout << "File not found: " << fileName << endl;
 }
