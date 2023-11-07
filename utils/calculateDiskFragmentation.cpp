@@ -2,42 +2,33 @@
 using namespace std;
 #include "../entities/FileSystem.h"
 
-// int calculateDiskFragmentation(const Filesystem &fs)
-// {
-//     int fragmentedBlocks = 0;
+int calculateSizeOfLastUnusedBlock(const Filesystem &fs)
+{
+    int lastUnusedBlockSize = 0;
+    int index = MAX_BLOCKS - 1;
 
-//     // Track if we are currently in an unused space
-//     bool inUnusedSpace = false;
+    // Starting from the last block, find the last unused block and calculate its size
+    while (index >= 0 && fs.blocks[index].used == 0)
+    {
+        lastUnusedBlockSize++;
+        index--;
+    }
 
-//     for (int i = 0; i < MAX_BLOCKS - 1; i++)
-//     {
-//         if (fs.blocks[i].used == 0)
-//         {
-//             if (!inUnusedSpace)
-//             {
-//                 // Start of an unused space, count it as fragmented
-//                 fragmentedBlocks++;
-//                 inUnusedSpace = true;
-//             }
-//         }
-//         else
-//         {
-//             inUnusedSpace = false;
-//         }
-//     }
+    // cout << "Last block : " << lastUnusedBlockSize << endl;
 
-//     return fragmentedBlocks;
-// }
+    return lastUnusedBlockSize;
+}
 
 int calculateDiskFragmentation(const Filesystem &fs)
 {
     int fragmentedBlocks = 0;
-    for (int i = 0; i < MAX_BLOCKS - 1; i++)
+    int lastUnusedBlockSize = calculateSizeOfLastUnusedBlock(fs);
+    for (int i = 0; i < MAX_BLOCKS; i++)
     {
         if (fs.blocks[i].used == 0)
         {
             fragmentedBlocks++;
         }
     }
-    return fragmentedBlocks;
+    return fragmentedBlocks - lastUnusedBlockSize;
 }

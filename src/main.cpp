@@ -46,7 +46,7 @@ int main()
         cout << "4. Navigate to different directory" << endl;
         cout << "5. Rename a file" << endl;
         cout << "6. Rename a directory" << endl;
-        cout << "7. Defragment the disk" << endl;
+        cout << "7. Calculate Disk Fragmentation" << endl;
         cout << "8. Calculate Wasted Disk Space" << endl;
         cout << "9. Delete a file" << endl;
         cout << "10. Delete a directory" << endl;
@@ -168,6 +168,7 @@ int main()
 
         case 7:
             fragmentedBlocks = calculateDiskFragmentation(fs);
+            // calculateDiskFragmentation(fs);
             for (int i = 0; i < MAX_BLOCKS; i++)
             {
                 if (fs.blocks[i].used == 1)
@@ -175,7 +176,7 @@ int main()
                     totalBlocks++;
                 }
             }
-            cout << "Disk Fragmentation: " << fragmentedBlocks << " out of " << totalBlocks << " blocks." << endl;
+            cout << "Disk Fragmentation: " << fragmentedBlocks << " out of " << totalBlocks << " KB." << endl;
             cout << "------------------------------------------------------";
             break;
 
