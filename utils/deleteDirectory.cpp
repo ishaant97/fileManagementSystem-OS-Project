@@ -8,18 +8,15 @@ void deleteDirectory(Directory &parent, const std::string &dirName)
     {
         if (parent.subdirectories[i].name == dirName)
         {
-            // Check if the directory is empty before deleting it
             if (!parent.subdirectories[i].files.empty() || !parent.subdirectories[i].subdirectories.empty())
             {
                 std::cout << "Directory is not empty. Cannot delete." << std::endl;
                 return;
             }
-
-            // Remove the directory
             parent.subdirectories.erase(parent.subdirectories.begin() + i);
-            std::cout << "Directory '" << dirName << "' deleted successfully." << std::endl;
+            cout << "Directory '" << dirName << "' deleted successfully." << endl;
             return;
         }
     }
-    std::cout << "Directory not found: " << dirName << std::endl;
+    cout << "Directory not found: " << dirName << endl;
 }

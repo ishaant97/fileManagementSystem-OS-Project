@@ -9,7 +9,7 @@ void renameDirectory(Directory &currentdirectory, string &oldName, string &newNa
         if (subdirectory.name == oldName)
         {
             subdirectory.name = newName;
-            // std::cout << "Directory renamed successfully to: " << newName << std::endl;
+            cout << "Directory renamed successfully to: " << newName << endl;
             return;
         }
     }

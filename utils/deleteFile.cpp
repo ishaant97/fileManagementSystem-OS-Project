@@ -8,16 +8,13 @@ void deleteFile(Directory &directory, string &fileName, Filesystem &fs)
     {
         if (directory.files[i].name == fileName)
         {
-            // Clear the blocks used by the file
             for (int j = directory.files[i].start_block; j < directory.files[i].start_block + directory.files[i].size; ++j)
             {
                 fs.blocks[j].used = 0;
                 fs.blocks[j].file_index = -1;
             }
-
-            // Remove the file from the directory
             directory.files.erase(directory.files.begin() + i);
-            // std::cout << "File '" << fileName << "' deleted successfully." << std::endl;
+            cout << "File '" << fileName << "' deleted successfully." << endl;
             return;
         }
     }

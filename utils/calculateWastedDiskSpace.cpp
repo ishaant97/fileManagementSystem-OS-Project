@@ -4,13 +4,13 @@ using namespace std;
 
 int calculateWastedDiskSpace(Filesystem &fs)
 {
-    int wasted_blocks = 0;
+    int wastedDiskSpace = 0;
     for (int i = 0; i < MAX_BLOCKS; i++)
     {
         if (fs.blocks[i].used == 0)
         {
-            wasted_blocks++;
+            wastedDiskSpace++;
         }
     }
-    return wasted_blocks;
+    return wastedDiskSpace;
 }

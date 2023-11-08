@@ -116,9 +116,9 @@ int main()
             {
                 if (!directoryHistory.empty())
                 {
-                    currentDirectory = directoryHistory.top(); // Go up one level
+                    currentDirectory = directoryHistory.top();
                     directoryHistory.pop();
-                    cout << "You are successfully navigated to on level up" << endl;
+                    cout << "You are successfully navigated to one level up" << endl;
                     cout << "------------------------------------------------------";
                 }
                 else
@@ -129,21 +129,18 @@ int main()
             }
             else
             {
-                // Search for the desired subdirectory
                 for (auto &subdirectory : currentDirectory.subdirectories)
                 {
                     if (subdirectory.name == targetDir)
                     {
-                        // Push the current directory to the history
                         directoryHistory.push(currentDirectory);
                         currentDirectory = subdirectory;
-                        std::cout << "You are successfully navigated to: " << targetDir << std::endl;
-                        std::cout << "------------------------------------------------------";
+                        cout << "You are successfully navigated to: " << targetDir << endl;
+                        cout << "------------------------------------------------------";
                         break;
                     }
                 }
             }
-            // std::cout << targetDir << "Not Found" << std::endl;
             break;
 
         case 5:
@@ -162,13 +159,11 @@ int main()
             cout << "Enter the new name for the directory: ";
             cin >> newDirName;
             renameDirectory(currentDirectory, oldDirName, newDirName);
-            cout << oldDirName << " was successfully renamed to " << newDirName << endl;
             cout << "------------------------------------------------------";
             break;
 
         case 7:
             fragmentedBlocks = calculateDiskFragmentation(fs);
-            // calculateDiskFragmentation(fs);
             for (int i = 0; i < MAX_BLOCKS; i++)
             {
                 if (fs.blocks[i].used == 1)
@@ -189,7 +184,6 @@ int main()
             cout << "Enter the name of the file to delete: ";
             cin >> name;
             deleteFile(currentDirectory, name, fs);
-            cout << name << " was successfully deleted" << endl;
             cout << "------------------------------------------------------";
             break;
 
@@ -197,7 +191,6 @@ int main()
             cout << "Enter the name of the directory to delete: ";
             cin >> subDirName;
             deleteDirectory(currentDirectory, subDirName);
-            cout << subDirName << " was successfully deleted" << endl;
             cout << "------------------------------------------------------";
             break;
 
